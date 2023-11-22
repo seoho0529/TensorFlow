@@ -8,3 +8,33 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import tensorflow as tf
 print(tf.__version__)
 print('GPU사용가능!~!' if tf.test.is_gpu_available() else 'GPU사용 불가능 ㅠㅠ')
+print(tf.config.list_physical_devices('GPU'))
+
+print('tensor : 수치용 컨테이너(수치를 담을 수 있는 메모리). 임의의 차원을 가진 행렬의 일반화된 모습이다. 계산 그래프 구조를 가지며 병렬연산이 기본이다.')
+print(1, type(1))  # 1 <class 'int'>
+print(tf.constant(1), type(tf.constant(1))) # tf.Tensor(1, shape=(), dtype=int32), EagerTensor
+print(tf.constant([1]), ' ', tf.rank(tf.constant([1]))) # 1-d tensor : vector
+print(tf.constant([[1]]))  # 2-d tensor : matrix
+print()
+a = tf.constant([1,2])
+b = tf.constant([3,4])
+c = a + b
+print(c)
+d = tf.add(a,b) # add의 경우 tensorflow의 add함수이지만 사실상 numpy의 add함수를 쓰는 느낌
+print(d)  # edge : 노드와 노드 사이를 운반 |  node : 텐서를 운반(저장된 변수를 읽거나 쓰는 역할) 
+print()
+print(7)
+print(tf.convert_to_tensor(7, dtype=tf.float32))
+print(tf.cast(7, dtype=tf.float32))
+print(tf.constant(7.0))
+print(tf.constant(7, dtype=tf.float32))
+# 일반 7이란 숫자를 tf를 사용해 타입을 다르게 나타낼 수 있음. 
+
+print()
+import numpy as np
+arr = np.array([1,2])
+print(arr, type(arr))
+tfarr = tf.add(arr, 5)
+print(tfarr)
+print(tfarr.numpy())
+print(np.add(tfarr, 3))
